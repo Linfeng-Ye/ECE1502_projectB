@@ -1,67 +1,12 @@
-[![Multi-Modality](agorabanner.png)](https://discord.gg/qUtxnK2NMf)
+In the first part of this project, we conduct a comprehensive analysis of the Mamba model and its key innovations, highlighting its major technical contributions and the improvements it introduces over existing approaches. We examine how the Mamba model addresses current challenges in sequence modeling by incorporating features like the selection mechanism and hardware-aware algorithms, which enhance its efficiency, scalability, and overall performance.
 
-# Vision Mamba
-Implementation of Vision Mamba from the paper: "Vision Mamba: Efficient Visual Representation Learning with Bidirectional State Space Model" It's 2.8x faster than DeiT and saves 86.8% GPU memory when performing batch inference to extract features on high-res images. 
-
-[PAPER LINK](https://arxiv.org/abs/2401.09417)
-
-## Installation
-
-```bash
-pip install vision-mamba
-```
-
-# Usage
-```python
-import torch
-from vision_mamba import Vim
-
-# Forward pass
-x = torch.randn(1, 3, 224, 224)  # Input tensor with shape (batch_size, channels, height, width)
-
-# Model
-model = Vim(
-    dim=256,  # Dimension of the transformer model
-    heads=8,  # Number of attention heads
-    dt_rank=32,  # Rank of the dynamic routing matrix
-    dim_inner=256,  # Inner dimension of the transformer model
-    d_state=256,  # Dimension of the state vector
-    num_classes=1000,  # Number of output classes
-    image_size=224,  # Size of the input image
-    patch_size=16,  # Size of each image patch
-    channels=3,  # Number of input channels
-    dropout=0.1,  # Dropout rate
-    depth=12,  # Depth of the transformer model
-)
-
-# Forward pass
-out = model(x)  # Output tensor from the model
-print(out.shape)  # Print the shape of the output tensor
-print(out)  # Print the output tensor
+Following this exploration, we propose three potential directions for further extending the Mamba model's capabilities. Each extension builds on the model's foundational principles, aiming to improve its performance, broaden its applicability, or address specific limitations. To demonstrate the feasibility of these extensions, we present preliminary results from one of them, offering valuable insights into the potential impact of the proposed ideas. These initial findings lay the groundwork for future research and development, highlighting Mamba’s potential to drive advancements in the field of deep learning.
 
 
-
+# To run the experiments
+```python train.py --dim 32 --depth 4
+   python train.py --dim 64 --depth 8
+   python train.py --dim 32 --depth 16
 ```
 
 
-
-## Citation
-```bibtex
-@misc{zhu2024vision,
-    title={Vision Mamba: Efficient Visual Representation Learning with Bidirectional State Space Model}, 
-    author={Lianghui Zhu and Bencheng Liao and Qian Zhang and Xinlong Wang and Wenyu Liu and Xinggang Wang},
-    year={2024},
-    eprint={2401.09417},
-    archivePrefix={arXiv},
-    primaryClass={cs.CV}
-}
-```
-
-# License
-MIT
-
-
-
-# Todo
-- [ ] Create training script for imagenet
-- [ ] Create a visual mamba for facial recognition
